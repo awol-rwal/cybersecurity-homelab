@@ -1,0 +1,141 @@
+
+document:
+  fill: "#20252b"
+  aspectRatio: "4:5"
+  watermark: false
+
+diagram:
+  columns: 7
+  rows: 9
+  gridLines: false
+  invertY: false
+
+title:
+  text: "Cybersecurity Homelab"
+  subText: "Virtualised network, web security and monitoring"
+  type: "bar"
+  color: "white"
+  fill: "#303841"
+  stroke: "#303841"
+  heightPercentage: 7
+
+defaults: &defaults
+  iconFamily: "cisco"
+  color: "white"
+  fill: "#343e49"
+  stroke: "#8fa2b5"
+  iconFill: "#ffffff"
+  iconStroke: "#ffffff"
+  textLocation: "bottomCenter"
+
+icons:
+  ubuntuDesktop:
+    <<: *defaults
+    x: 1
+    y: 1
+    icon: "server"
+    text: "Ubuntu Desktop"
+
+  windowsVM:
+    <<: *defaults
+    x: 5
+    y: 1
+    icon: "server"
+    text: "Windows 11 VM"
+
+  labSwitch:
+    <<: *defaults
+    x: 3
+    y: 3
+    icon: "switch"
+    text: "Lab Network"
+
+  juiceShopServer:
+    <<: *defaults
+    x: 1
+    y: 5
+    icon: "server"
+    text: "Ubuntu - Web Server"
+
+  wazuhServer:
+    <<: *defaults
+    x: 5
+    y: 5
+    icon: "server"
+    text: "Ubuntu - Wazuh"
+
+notes:
+  webServices:
+    x: 0
+    y: 6
+    w: 2
+    h: 1.4
+    color: "white"
+    fill: "#364553"
+    stroke: "#8fa2b5"
+    text: |
+      **Web Server**
+      - OWASP Juice Shop
+      - Docker
+      - Nginx reverse proxy
+      - Wazuh Agent
+
+  wazuhServices:
+    x: 4
+    y: 6
+    w: 2
+    h: 1.4
+    color: "white"
+    fill: "#364553"
+    stroke: "#8fa2b5"
+    text: |
+      **Security Monitoring**
+      - Wazuh Server
+      - Wazuh Dashboard
+      - Endpoint telemetry
+
+connections:
+  - endpoints: ["ubuntuDesktop", "labSwitch"]
+    stroke: "#cbd5e1"
+    color: "white"
+
+  - endpoints: ["windowsVM", "labSwitch"]
+    stroke: "#cbd5e1"
+    color: "white"
+
+  - endpoints: ["labSwitch", "juiceShopServer"]
+    stroke: "#cbd5e1"
+    color: "white"
+
+  - endpoints: ["labSwitch", "wazuhServer"]
+    stroke: "#cbd5e1"
+    color: "white"
+
+  - endpoints: ["juiceShopServer:Wazuh Agent", "wazuhServer:SIEM"]
+    stroke: "#45c8a5"
+    color: "#45c8a5"
+    strokeWidth: 2
+    strokeDashArray: "6,4"
+
+groups:
+  endpoints:
+    text: "Workstations"
+    members: ["ubuntuDesktop", "windowsVM"]
+    color: "#ffffff"
+    stroke: "#788b9c"
+    fill: "rgba(80, 110, 140, 0.10)"
+    textLocation: "topCenter"
+
+  webHost:
+    text: "Application Server"
+    members: ["juiceShopServer", "webServices"]
+    color: "#ffffff"
+    stroke: "#788b9c"
+    fill: "rgba(80, 110, 140, 0.10)"
+
+  monitoring:
+    text: "Security Monitoring"
+    members: ["wazuhServer", "wazuhServices"]
+    color: "#ffffff"
+    stroke: "#788b9c"
+    fill: "rgba(80, 110, 140, 0.10)"
