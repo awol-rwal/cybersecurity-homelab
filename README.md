@@ -20,6 +20,9 @@ The lab is a work in progress. I'll add configuration notes, diagrams, and exper
 
 The lab uses virtual machines and a local test network. More detailed network architecture documentation will be added as the configuration develops.
 
+## Homelab Topology - Written on [https://drawthenet.io/]
+![Network Topology](architecture/network-topology.png)
+
 ## Tools and technologies
 
 - **Virtualisation:** Hyper-V
