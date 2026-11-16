@@ -8,6 +8,9 @@ This repository documents the setup and development of my cybersecurity homelab.
 
 The lab is a work in progress. I'll add configuration notes, diagrams, and experiments as I complete them.
 
+## Lab Topology - Written on https://drawthenet.io/
+![Network Topology](architecture/network-topology.svg)
+
 ## Current environment
 
 | Component | Purpose | Status |
@@ -19,9 +22,6 @@ The lab is a work in progress. I'll add configuration notes, diagrams, and exper
 | Windows 11 virtual machine | Windows security testing and telemetry | VM set up; monitoring planned |
 
 The lab uses virtual machines and a local test network. More detailed network architecture documentation will be added as the configuration develops.
-
-## Homelab Topology - Written on https://drawthenet.io/
-![Network Topology](architecture/network-topology.svg)
 
 ## Tools and technologies
 
