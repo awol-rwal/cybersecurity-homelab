@@ -1,0 +1,94 @@
+document:
+  fill: "#20252b"
+  aspectRatio: "16:9"
+  watermark: false
+
+diagram:
+  columns: 9
+  rows: 6
+  gridLines: false
+  invertY: false
+  gridPaddingInner: 0.25
+  iconLabelFontSize: 12
+  margins:
+    top: 25
+    right: 30
+    bottom: 25
+
+title:
+  text: "Cybersecurity Homelab"
+  subText: "Lab network topology | 10.77.77.x"
+  type: "bar"
+  color: "white"
+  fill: "#303841"
+  stroke: "#303841"
+  heightPercentage: 8
+
+workstation: &workstation
+  iconFamily: "Iconify"
+  icon: "lucide:monitor"
+  color: "#ffffff"
+  fill: "#343e49"
+  stroke: "#8fa2b5"
+  iconFill: "#ffffff"
+  textLocation: "bottomCenter"
+  fontSize: 12
+  w: 2
+  h: 1
+
+server: &server
+  <<: *workstation
+  icon: "lucide:server"
+  w: 2.3
+
+icons:
+  kaliDesktop:
+    <<: *workstation
+    x: 1
+    y: 0.9
+    text: "Kali Desktop\n10.77.77.10"
+
+  ubuntuDesktop:
+    <<: *workstation
+    x: 4
+    y: 0.9
+    text: "Ubuntu Desktop\n10.77.77.30"
+
+  windowsVM:
+    <<: *workstation
+    x: 7
+    y: 0.9
+    text: "Windows 11 VM\nIP unassigned"
+
+  labNetwork:
+    <<: *workstation
+    icon: "lucide:network"
+    x: 4
+    y: 2.65
+    w: 1.8
+    text: "Lab network"
+
+  juiceShopServer:
+    <<: *server
+    x: 2
+    y: 4.55
+    text: "Juice Shop Server\n10.77.77.20"
+
+  wazuhServer:
+    <<: *server
+    x: 6
+    y: 4.55
+    text: "Wazuh Server\n10.77.77.40"
+
+connections:
+  - { endpoints: ["kaliDesktop", "labNetwork"], stroke: "#cbd5e1" }
+  - { endpoints: ["ubuntuDesktop", "labNetwork"], stroke: "#cbd5e1" }
+  - { endpoints: ["windowsVM", "labNetwork"], stroke: "#cbd5e1" }
+  - { endpoints: ["labNetwork", "juiceShopServer"], stroke: "#cbd5e1" }
+  - { endpoints: ["labNetwork", "wazuhServer"], stroke: "#cbd5e1" }
+
+  # Logical Wazuh telemetry flow over the lab network.
+  - endpoints: ["juiceShopServer", "wazuhServer"]
+    stroke: "#45c8a5"
+    strokeWidth: 2
+    strokeDashArray: "6,4"
